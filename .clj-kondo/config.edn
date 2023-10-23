@@ -1,0 +1,5 @@
+{
+  :output  {:exclude-files ["_test.clj"]}
+  :linters {:unsorted-required-namespaces {:level :warning}
+            :unused-value {:level :warning}}
+}

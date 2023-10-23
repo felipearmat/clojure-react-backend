@@ -1,0 +1,93 @@
+{:paths   ["src/clj"
+           "resources"]
+
+ :deps    {org.clojure/clojure                 {:mvn/version "1.11.1"}
+
+           ;; Routing
+           metosin/reitit                      {:mvn/version "0.6.0"}
+
+           ;; Ring (http server)
+           metosin/ring-http-response          {:mvn/version "0.9.3"}
+           ring/ring-core                      {:mvn/version "1.10.0"}
+           ring/ring-defaults                  {:mvn/version "0.3.4"}
+           ring-cors/ring-cors                 {:mvn/version "0.1.13"}
+
+           ;; clojure http client
+           clj-http/clj-http                   {:mvn/version "3.12.3"}
+
+           ;; Structures/Functions Specs
+           org.clojure/spec.alpha              {:mvn/version "0.3.218"}
+
+           ;; Logging
+           ch.qos.logback/logback-classic      {:mvn/version "1.4.11"}
+
+           ;; Data coercion
+           luminus-transit/luminus-transit     {:mvn/version "0.1.6"
+                                                :exclusions [com.cognitect/transit-clj]}
+           metosin/muuntaja                    {:mvn/version "0.6.8"}
+
+           ;; kit Libs
+           io.github.kit-clj/kit-core          {:mvn/version "1.0.5"}
+           io.github.kit-clj/kit-undertow      {:mvn/version "1.0.6"}
+           io.github.kit-clj/kit-mysql         {:mvn/version "1.0.5"}
+           io.github.kit-clj/kit-postgres      {:mvn/version "1.0.4"}
+           io.github.kit-clj/kit-sql-conman    {:mvn/version "1.0.8"}
+           io.github.kit-clj/kit-sql-migratus  {:mvn/version "1.0.4"}
+           io.github.kit-clj/kit-quartz        {:mvn/version "1.0.3"}
+           io.github.kit-clj/kit-metrics       {:mvn/version "1.0.3"}
+
+           ;; infix math operations
+           rm-hull/infix                       {:mvn/version "0.4.0"}
+
+           ;; SQL as Clojure data structures
+           com.github.seancorfield/honeysql    {:mvn/version "2.4.1078"}
+
+           ;; Auth
+           buddy/buddy-auth                    {:mvn/version "3.0.323"}
+           buddy/buddy-hashers                 {:mvn/version "2.0.167"}
+
+           ;;Time library required for Auth
+           clj-time/clj-time                   {:mvn/version "0.15.2"}
+
+           ;; Config state manager for REPL
+           integrant/repl                      {:mvn/version "0.3.3"}}
+
+ :aliases {:build {:deps {io.github.clojure/tools.build {:git/sha "24f2894"
+                                                         :git/tag "v0.9.5" :git/url "https://github.com/clojure/tools.build.git"}}
+                   :ns-default build}
+
+
+           :dev  {:extra-deps  {com.lambdaisland/classpath      {:mvn/version "0.4.44"}
+                                criterium/criterium             {:mvn/version "0.4.6"}
+                                expound/expound                 {:mvn/version "0.9.0"}
+                                mvxcvi/cljstyle                 {:mvn/version "0.15.0"}
+                                pjstadig/humane-test-output     {:mvn/version "0.11.0"}
+                                ring/ring-devel                 {:mvn/version "1.10.0"}
+                                ring/ring-mock                  {:mvn/version "0.4.0"}
+                                io.github.kit-clj/kit-generator {:mvn/version "0.1.8"}
+                                org.clojure/tools.namespace     {:mvn/version "1.4.4"}}
+                  :exec-fn      user/start-dev
+                  :extra-paths ["env/dev/clj" "env/dev/resources" "test/clj"]}
+
+           :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.0.0"}}
+                   :main-opts  ["-m" "nrepl.cmdline" "-i"]}
+
+           :cider {:extra-deps {nrepl/nrepl       {:mvn/version "1.0.0"}
+                                cider/cider-nrepl {:mvn/version "0.37.1"}}
+                   :main-opts  ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]" "-i"]}
+
+           :test {:extra-deps  {criterium/criterium                  {:mvn/version "0.4.6"}
+                                expound/expound                      {:mvn/version "0.9.0"}
+                                io.github.cognitect-labs/test-runner {:git/url "https://github.com/cognitect-labs/test-runner.git"
+                                                                      :git/tag "v0.5.1"
+                                                                      :git/sha "dfb30dd"}
+                                pjstadig/humane-test-output          {:mvn/version "0.11.0"}
+                                ring/ring-devel                      {:mvn/version "1.10.0"}
+                                ring/ring-mock                       {:mvn/version "0.4.0"}
+                                io.github.kit-clj/kit-generator      {:mvn/version "0.1.8"}
+                                org.clojure/tools.namespace          {:mvn/version "1.4.4"}
+                                com.lambdaisland/classpath           {:mvn/version "0.4.44"}}
+                  :exec-fn      cognitect.test-runner.api/test
+                  :extra-paths ["env/dev/clj" "env/dev/resources" "env/test/resources" "test/clj"]
+                  :main-opts   ["-e" "(require 'pjstadig.humane-test-output) (pjstadig.humane-test-output/activate!)"
+                                "-m" "cognitect.test-runner"]}}}
