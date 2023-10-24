@@ -12,8 +12,7 @@
         operation-type (:operationType params)
         amount-operator (:amountOperator params)
         amount-value (:amountValue params)
-        query [:and
-                [:= :users.email user]
+        query [:and [:= :users.email user]
                 (when (seq operation-type)
                   [:= :operations.type operation-type])
                 (when (and (seq amount-operator) (seq amount-value))

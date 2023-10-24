@@ -8,6 +8,7 @@
     [kit.edge.scheduling.quartz]
     [kit.edge.server.undertow]
     [kit.edge.utils.metrics]
+    [kit.edge.utils.repl]
     [sample.app.config :as config]
     [sample.app.env :refer [defaults]]
     [sample.app.web.handler]
