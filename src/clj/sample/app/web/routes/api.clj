@@ -47,7 +47,7 @@
     ["/logout" {:post auth/logout!}]
     ["/data"   {:get auth/data}]
     ["/v1"     {:middleware [middleware/authentication-middleware]}
-      ["/record"        {:get record/get-records}]
+      ["/records"        {:get record/get-records}]
       ["/record/delete" {:post record/delete-records!}]
       ["/calculate"     {:post calculator/calculate}]]])
 
