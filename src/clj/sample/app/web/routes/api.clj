@@ -6,7 +6,6 @@
     [reitit.ring.middleware.muuntaja :as muuntaja]
     [reitit.ring.middleware.parameters :as parameters]
     [reitit.swagger :as swagger]
-    [sample.app.env :refer [environment]]
     [sample.app.web.controllers.auth :as auth]
     [sample.app.web.controllers.calculator :as calculator]
     [sample.app.web.controllers.health :as health]
@@ -42,13 +41,13 @@
   [["/swagger.json" {:get {:no-doc  true
                      :swagger {:info {:title "sample.app API"}}
                      :handler (swagger/create-swagger-handler)}}]
-    ["/health" {:get health/healthcheck!}]
-    ["/login"  {:post auth/login!}]
-    ["/logout" {:post auth/logout!}]
-    ["/data"   {:get auth/data}]
-    ["/v1"     {:middleware [middleware/authentication-middleware]}
-      ["/records"        {:get record/get-records}]
-      ["/record/delete" {:post record/delete-records!}]
+    ["/health"      {:get health/healthcheck!}]
+    ["/auth"        {:get    auth/data
+                     :post   auth/login!
+                     :delete auth/logout!}]
+    ["/v1" {:middleware [middleware/authentication-middleware]}
+      ["/records"       {:get record/get-records
+                         :delete record/delete-records!}]
       ["/calculate"     {:post calculator/calculate}]]])
 
 (derive :reitit.routes/api :reitit/routes)

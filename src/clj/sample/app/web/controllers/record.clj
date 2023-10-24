@@ -2,7 +2,6 @@
   (:require
     [ring.util.http-response :as http-response]
     [sample.app.calculator.core :as calculator]
-    [clojure.tools.logging :as log]
     [sample.app.models.records :as records]))
 
 (defn get-records

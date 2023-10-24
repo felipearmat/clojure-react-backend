@@ -2,6 +2,7 @@
   (:require
     [clojure.tools.logging :as log]
     [integrant.core :as ig]
+    [integrant.repl :as igr]
     [kit.edge.db.postgres]
     [kit.edge.db.sql.conman]
     [kit.edge.db.sql.migratus]
@@ -10,7 +11,6 @@
     [kit.edge.utils.metrics]
     [kit.edge.utils.repl]
     [sample.app.config :as config]
-    [integrant.repl :as igr]
     [sample.app.env :refer [defaults]]
     [sample.app.web.handler]
     [sample.app.web.routes.api])

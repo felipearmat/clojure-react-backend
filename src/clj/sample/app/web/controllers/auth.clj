@@ -1,6 +1,6 @@
 (ns sample.app.web.controllers.auth
   (:require
-    [ring.util.http-response :refer [found ok unauthorized]]
+    [ring.util.http-response :refer [ok unauthorized]]
     [sample.app.auth.core :refer [generate-cookie]]
     [sample.app.calculator.core :as calculator]
     [sample.app.env :as env]
@@ -15,7 +15,7 @@
       (unauthorized))))
 
 (defn logout! [_]
-  (assoc (found "/") :cookies {(:cookie-name env/defaults) {:value "" :path "/"}}))
+  (assoc (ok "/") :cookies {(:cookie-name env/defaults) {:value "" :path "/"}}))
 
 (defn data
   [{:keys [identity]}]
