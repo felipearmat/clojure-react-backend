@@ -10,6 +10,7 @@
     [kit.edge.utils.metrics]
     [kit.edge.utils.repl]
     [sample.app.config :as config]
+    [integrant.repl :as igr]
     [sample.app.env :refer [defaults]]
     [sample.app.web.handler]
     [sample.app.web.routes.api])
@@ -25,6 +26,14 @@
 
 (defonce system (atom nil))
 
+(defn prepare-db-hsql [response]
+  (igr/set-prep! (fn []
+                    (-> (config/system-config {:profile :dev})
+                        (ig/prep))))
+  (igr/prep)
+  (igr/init [:db.sql/connection])
+  response)
+
 (defn stop-app []
   ((or (:stop defaults) (fn [])))
   (some-> (deref system) (ig/halt!))
@@ -35,7 +44,8 @@
   (->> (config/system-config (or (:opts params) (:opts defaults) {}))
        (ig/prep)
        (ig/init)
-       (reset! system))
+       (reset! system)
+       (prepare-db-hsql))
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop-app)))
 
 (defn -main [& _]
