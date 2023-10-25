@@ -15,7 +15,7 @@
       (unauthorized))))
 
 (defn logout! [_]
-  (assoc (ok "/") :cookies {(:cookie-name env/defaults) {:value "" :path "/"}}))
+  (assoc (ok) :cookies {(:cookie-name env/defaults) {:value "" :path "/"}}))
 
 (defn data
   [{:keys [identity]}]
