@@ -51,10 +51,10 @@
 (defn record-operation
   "Create a record for a specific operation."
   ([user-id operation operation-response]
-    (records/create-record! {:operation_id (:id operation)
-                             :user_id      user-id
-                             :amount       (:cost operation)
-                             :operation_response operation-response}))
+   (records/create-record! {:operation_id (:id operation)
+                            :user_id      user-id
+                            :amount       (:cost operation)
+                            :operation_response (str operation-response)}))
   ([user-id operation]
     (record-operation user-id operation "")))
 

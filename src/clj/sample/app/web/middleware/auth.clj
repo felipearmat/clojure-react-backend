@@ -22,7 +22,7 @@
 (defn wrap-renew-token
   [handler]
   (fn [request]
-    (if (authenticated? request)
+    (if (and (authenticated? request) (not= "/api/auth" (:uri request)))
       (let [new-cookie (auth/generate-cookie (:user (:identity request)))]
         (->> request
           (handler)
